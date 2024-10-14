@@ -11,7 +11,7 @@ function filterEvens(numbers) {
   return new Promise((resolve) => {
     setTimeout(() => {
       const evens = numbers.filter((num) => num % 2 === 0);
-      output.textContent = `Filtered evens: ${evens.join(', ')}`;
+      output.textContent = `${evens.join(', ')}`;
       resolve(evens);
     }, 1000);
   });
@@ -20,7 +20,7 @@ function multiplyEvens(evens) {
   return new Promise((resolve) => {
     setTimeout(() => {
       const multiplied = evens.map((num) => num * 2);
-      output.textContent = `Multiplied evens: ${multiplied.join(', ')}`;
+      output.textContent = `${multiplied.join(', ')}`;
       resolve(multiplied);
     }, 2000);
   });
