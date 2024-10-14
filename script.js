@@ -1,33 +1,27 @@
 //your JS code here. If required.
-const output = document.getElementById("output");
-function getNumbers() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([1, 2, 3, 4]);
+function manipulateData(inputArray) {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+      resolve(inputArray);
     }, 3000);
-  });
+	}).then((array) => {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				const evenNumbers = array.filter((num) => num % 2 === 0);
+				document.getElementById("output").innerText = evenNumbers.join(",");
+				resolve(evenNumbers);
+			},1000);
+		})
+	}).then((evenNumbers)=> {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				const doubleNumbers = evenNumbers.map((num) => num * 2);
+				document.getElementById("output").innerText = doubleNumbers.join(",");
+				resolve(doubleNumbers);
+			},2000);
+		})
+	});
 }
-function filterEvens(numbers) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const evens = numbers.filter((num) => num % 2 === 0);
-      output.textContent = `${evens.join(', ')}`;
-      resolve(evens);
-    }, 1000);
-  });
-}
-function multiplyEvens(evens) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const multiplied = evens.map((num) => num * 2);
-      output.textContent = `${multiplied.join(', ')}`;
-      resolve(multiplied);
-    }, 2000);
-  });
-}
-getNumbers()
-  .then((numbers) => filterEvens(numbers))
-  .then((evens) => multiplyEvens(evens))
-  .catch((error) => {
-    output.textContent = `Error: ${error.message}`;
-});
+
+const inputArray = [1, 2, 3, 4];
+manipulateData(inputArray);
